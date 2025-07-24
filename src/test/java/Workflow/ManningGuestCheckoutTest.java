@@ -18,6 +18,21 @@ public class ManningGuestCheckoutTest {
     WebDriver driver;
     ChromeOptions options;
     Map<String, Object> mobileEmulation;
+    // Setup
+    String searchKeyword = "lotion";
+    String productFullName = "Hada Labo AHA Lotion 170ml";
+    int oldQuantity = 2;
+    int newQuantity = 5;
+    // Home Delivery Address form information
+    String emailAddress = "scharlo3@fudier.com";
+    String fullName = "Deadline Fighter";
+    String region = "Kowloon";
+    String district = "Cheung Sha Wan";
+    String address_1 = "Wing Hong Street 108";
+    String address_2 = "Oriental Building";
+    String address_3 = "15/F 1503";
+    String countryCode = "+852";
+    String mobileNumber = "61235123";
 
     @Test
     public void start() throws InterruptedException {
@@ -25,28 +40,41 @@ public class ManningGuestCheckoutTest {
         HandlePopup.closePromotionPopUp(driver);
         HandlePopup.closeCookiesPopUp(driver);
 
-        HandleSearchQuery.search(driver, "lotion");
+        // Searching the product
+        HandleSearchQuery.search(driver, searchKeyword);
         Thread.sleep(3000);
-
         HandleSearchQuery.selectSearchAll(driver);
         Thread.sleep(3000);
-
-        HandleSearchResult.findItem(driver, "Hada Labo AHA Lotion 170ml");
+        HandleSearchResult.findItem(driver, productFullName);
         Thread.sleep(500);
-
+        // Product Detail Page
         HandleProductDetailPage.addProductToCart(driver);
         Thread.sleep(500);
-
-        HandleProductDetailPage.editQty(driver, 3);
+        HandleProductDetailPage.editQty(driver, oldQuantity);
         Thread.sleep(500);
-
-        HandleProductDetailPage.decreaseQtyButton(driver);
-        Thread.sleep(500);
-
-        HandleProductDetailPage.increaseQtyButton(driver);
-        Thread.sleep(500);
-
+        // HandleProductDetailPage.decreaseQtyButton(driver);
+        // Thread.sleep(500);
+        // HandleProductDetailPage.increaseQtyButton(driver);
+        // Thread.sleep(500);
         HandleProductDetailPage.clickShoppingCartButton(driver);
+        Thread.sleep(5000);
+        // Shopping cart / checkout page
+        HandleCheckout.selectHomeDelivery(driver);
+        HandleCheckout.updateQty(driver, newQuantity);
+        HandleCheckout.clickChecoutSecurelyButton(driver);
+        HandleCheckout.clickGuestCheckoutButton(driver);
+        // Input guest adderss form
+        HandleGuestAddressForm.enterEmail(driver, emailAddress);
+        HandleGuestAddressForm.enterFullName(driver, fullName);
+        HandleGuestAddressForm.selectRegion(driver, region);
+        HandleGuestAddressForm.selectDistrict(driver, district);
+        HandleGuestAddressForm.enterStreetNumber(driver, address_1);
+        HandleGuestAddressForm.enterBuildingEstate(driver, address_2);
+        HandleGuestAddressForm.enterUnitFloor(driver, address_3);
+        HandleGuestAddressForm.selectCountryCode(driver, countryCode);
+        HandleGuestAddressForm.enterMobileNumber(driver, mobileNumber);
+        HandleGuestAddressForm.clickConfirmAddressButton(driver);
+        HandleGuestAddressForm.clickConfirmDetailsButton(driver);
         Thread.sleep(5000);
 
     }

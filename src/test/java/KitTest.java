@@ -40,15 +40,26 @@ public class KitTest {
     // Test your HandleXXX method here
     @Test
     public void start() throws InterruptedException {
-        driver.get("https://www.mannings.com.hk/en");
+        driver.get("https://www.mannings.com.hk/en/aronurish-toddler-formula-stage-3-750g/p/211896");
         HandlePopup.closePromotionPopUp(driver);
         HandlePopup.closeCookiesPopUp(driver);
 
-        HandleSearchQuery.search(driver, "lotion");
-        Thread.sleep(3000);
-        HandleSearchQuery.selectSearchAll(driver);
-        Thread.sleep(3000);
-        HandleSearchResult.findItem(driver, "Hada Labo AHA Lotion 170ml");
+        WebElement button = driver.findElement(By.xpath("//div[@class=\"react-tabs\"]"));
+        new Actions(driver).moveToElement(button).perform();
+        Thread.sleep(1500);
+        new Actions(driver).moveToElement(button, 0, -30).perform();
+        Thread.sleep(1500);
+        new Actions(driver).moveToElement(button, 0, -60).perform();
+        Thread.sleep(1500);
+        new Actions(driver).moveToElement(button, 0, -90).perform();
+        Thread.sleep(1500);
+        new Actions(driver).moveToElement(button, 0, -120).perform();
+
+        // HandleSearchQuery.search(driver, "lotion");
+        // Thread.sleep(3000);
+        // HandleSearchQuery.selectSearchAll(driver);
+        // Thread.sleep(3000);
+        // HandleSearchResult.findItem(driver, "Hada Labo AHA Lotion 170ml");
 
         // WebElement createAnAccountButton = driver
         // .findElement(By.xpath("//div[contains(@class,\"signIn-createAccount-O5F\")]/button"));
