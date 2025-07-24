@@ -12,7 +12,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-import Util.*;
+import Util.HandleCheckout;
+import Util.HandleGuestAddressForm;
+import Util.HandlePaymentMethod;
+import Util.HandlePopup;
+import Util.HandleProductDetailPage;
+import Util.HandleSearchQuery;
+import Util.HandleSearchResult;
 
 public class ManningGuestCheckoutTest {
     WebDriver driver;
@@ -20,7 +26,7 @@ public class ManningGuestCheckoutTest {
     Map<String, Object> mobileEmulation;
     // Setup
     String searchKeyword = "lotion";
-    String productFullName = "Hada Labo AHA Lotion 170ml";
+    String productFullName = "CeraVe Moisturising Lotion 1L";
     int oldQuantity = 2;
     int newQuantity = 5;
     // Home Delivery Address form information
@@ -33,6 +39,14 @@ public class ManningGuestCheckoutTest {
     String address_3 = "15/F 1503";
     String countryCode = "+852";
     String mobileNumber = "61235123";
+    // Payment Settings
+    // 1 = alipayHK
+    // 2 = Visa
+    // 3 = alipayCN
+    // 4 = Payme
+    // 5 = Octopus
+    // 6 = WeChatpay
+    int paymentMethod = 1;
 
     @Test
     public void start() throws InterruptedException {
@@ -75,8 +89,14 @@ public class ManningGuestCheckoutTest {
         HandleGuestAddressForm.enterMobileNumber(driver, mobileNumber);
         HandleGuestAddressForm.clickConfirmAddressButton(driver);
         HandleGuestAddressForm.clickConfirmDetailsButton(driver);
-        Thread.sleep(5000);
+        Thread.sleep(3000);
+        // Payment
+        HandlePaymentMethod.selectPaymentMethod(driver, paymentMethod);
 
+        HandlePaymentMethod.tncButton(driver);
+        HandlePaymentMethod.payNowButton(driver);
+        Thread.sleep(10000);
+        HandlePaymentMethod.payment(driver, paymentMethod);
     }
 
     @BeforeEach

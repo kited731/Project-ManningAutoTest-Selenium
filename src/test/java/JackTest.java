@@ -17,9 +17,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.interactions.Actions;
 
-
 import java.time.Duration;
-
 
 public class JackTest {
     WebDriver driver;
@@ -47,7 +45,8 @@ public class JackTest {
         HandlePopup.closeCookiesPopUp(driver);
         driver.findElement(By.xpath("//div[@class=\"index-box-tGb \"][4]")).click();
         Thread.sleep(5000);
-        WebElement createAnAccountButton = driver.findElement(By.xpath("//div[contains(@class,\"signIn-createAccount-O5F\")]/button"));
+        WebElement createAnAccountButton = driver
+                .findElement(By.xpath("//div[contains(@class,\"signIn-createAccount-O5F\")]/button"));
         WebElement newLetterText = driver.findElement(By.xpath("//div[@class=\"footer-subscriptionText-X1L\"]"));
         new Actions(driver).moveToElement(newLetterText).perform();
         Thread.sleep(1000);
@@ -67,7 +66,7 @@ public class JackTest {
         Thread.sleep(5000);
         driver.findElement(By.id("Password")).sendKeys("123456a");
         driver.findElement(By.id("ConfirmPassword")).sendKeys("123456a");
-        WebElement consentCheckbox = driver.findElement(By.id("subscribe")); 
+        WebElement consentCheckbox = driver.findElement(By.id("subscribe"));
         consentCheckbox.click();
         driver.findElement(By.xpath("//span[text()='Terms & Conditions']")).click();
         Thread.sleep(5000);
@@ -76,9 +75,17 @@ public class JackTest {
         driver.findElement(By.xpath("//span[text()='Direct Marketing purposes']")).click();
         Thread.sleep(5000);
         driver.findElement(By.xpath("//button[@class='popup-popupClose-TDK']//*[name()='svg']")).click();
+        // Captcha
+        WebElement nextElement = driver
+                .findElement(By.xpath("//div[contains(@class,\"footer-subscriptionText-X1L\")]"));
+        new Actions(driver).moveToElement(nextElement).perform();
         Thread.sleep(20000);
+        // Click Create Account
+        driver.findElement(By.xpath("//button[contains(@class,\"createAccount-submitButton\")]")).click();
+        Thread.sleep(5000);
         driver.quit();
     }
+
     @AfterEach
     public void terminate() {
         driver.quit();
