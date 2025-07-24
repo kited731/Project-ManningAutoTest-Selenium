@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 
 public class HandlePaymentMethod {
 
-    public static void selectPaymentMethod(WebDriver driver, int paymentOptions) {
+    public static void selectPaymentMethod(WebDriver driver, int paymentOptions) throws InterruptedException {
         // paymentOptions
         // 1 = alipayHK
         // 2 = Visa
@@ -58,38 +58,44 @@ public class HandlePaymentMethod {
                 WebElement alipayCn = driver.findElement(By.xpath("//img[contains(@src,\"zhifubao\")]"));
                 ((org.openqa.selenium.JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", alipayCn);
                 alipayCn.click();
+                Thread.sleep(1000);
                 break;
             case 4:
                 WebElement payMe = driver.findElement(By.xpath("//img[contains(@src,\"payme.svg\")]"));
                 ((org.openqa.selenium.JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", payMe);
                 payMe.click();
+                Thread.sleep(1000);
                 break;
             case 5:
                 WebElement octopus = driver.findElement(By.xpath("//img[contains(@src,\"octopus\")]"));
                 ((org.openqa.selenium.JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", octopus);
                 octopus.click();
+                Thread.sleep(1000);
                 break;
             case 6:
                 WebElement weChatPayHk = driver.findElement(By.xpath("//img[contains(@src,\"payment/wechat.svg\")]"));
                 ((org.openqa.selenium.JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", weChatPayHk);
                 weChatPayHk.click();
+                Thread.sleep(1000);
                 break;
         }
     }
 
-    public static void tncButton(WebDriver driver) {
+    public static void tncButton(WebDriver driver) throws InterruptedException {
         WebElement tncButton = driver.findElement(By.xpath("//div[contains(@class,\"checkoutPage-payTips-bZi\")]/button"));
         ((org.openqa.selenium.JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", tncButton);
         tncButton.click();
+        Thread.sleep(1000);
     }
 
-    public static void payNowButton(WebDriver driver) {
+    public static void payNowButton(WebDriver driver) throws InterruptedException {
         WebElement payNow = driver.findElement(By.xpath("//button[contains(@class,\"checkout\")]/"));
         ((org.openqa.selenium.JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", payNow);
         payNow.click();
+        Thread.sleep(1000);
     }
 
-    public static void payment(WebDriver driver, int paymentOptions) {
+    public static void payment(WebDriver driver, int paymentOptions) throws InterruptedException {
         // paymentOptions
         // 1 = alipayHK
         // 2 = Visa
@@ -101,11 +107,15 @@ public class HandlePaymentMethod {
             case 1:
                 WebElement alipayHk = driver.findElement(By.xpath("//span[@class='v2021-continue']"));
                 alipayHk.click();
+                Thread.sleep(1000);
                 WebElement alipayHkInputPhone = driver.findElement(By.xpath("//input[@id='logon_phone']"));
                 alipayHkInputPhone.click();
+                Thread.sleep(1000);
                 alipayHkInputPhone.sendKeys("61236123");
+                Thread.sleep(1000);
                 WebElement alipayHkSubmit = driver.findElement(By.xpath("//button[@type=\"submit\"]"));
                 alipayHkSubmit.click();
+                Thread.sleep(1000);
                 break;
             case 2:
                 //As the credit card is fake, transaction will be declined after clicking Pay Now button, therefore no payment will be tested for credit card.
@@ -113,10 +123,12 @@ public class HandlePaymentMethod {
             case 3:
                 WebElement alipayCn = driver.findElement(By.xpath("//button[@class='adm-button adm-button-primary adm-button-block adm-button-fill-outline adm-button-large adm-button-shape-default h5RouteAppSenior__h5pay']"));
                 alipayCn.click();
+                Thread.sleep(1000);
                 break;
             case 4:
                 WebElement payMe = driver.findElement(By.xpath("//img[@src=\"/venia-static-assets/images/payment/paymeIcon.svg\"]"));
                 payMe.click();
+                Thread.sleep(1000);
                 break;
             case 5:
                 //Show the QR code after clicking Pay Now button, therefore no test for octopus here.
@@ -124,6 +136,7 @@ public class HandlePaymentMethod {
             case 6:
                 WebElement weChatPayHk = driver.findElement(By.xpath("//button[@class=\"weui-btn weui-btn_warn enText-btn\"]"));
                 weChatPayHk.click();
+                Thread.sleep(1000);
                 break;
         }
     }
