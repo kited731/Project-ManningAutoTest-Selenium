@@ -9,6 +9,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
+import Util.HandlePaymentMethod;
+
 public class JasonTest {
     WebDriver driver;
     ChromeOptions options;
@@ -31,8 +33,13 @@ public class JasonTest {
     // Test your HandleXXX method here
     @Test
     public void start() throws InterruptedException {
+        int paymentOptions = 1;
         driver.get("https://www.mannings.com.hk/en/");
-        Thread.sleep(5000);
+        Thread.sleep(600000);
+        HandlePaymentMethod.selectPaymentMethod(driver, paymentOptions);
+        HandlePaymentMethod.tncButton(driver);
+        HandlePaymentMethod.payNowButton(driver);
+        HandlePaymentMethod.payment(driver, paymentOptions);
     }
 
     @AfterEach
